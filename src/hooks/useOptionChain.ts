@@ -1,10 +1,15 @@
+// Custom hook for fetching option contracts, handling expiry state, and subscribing to real-time LTP via WebSocket.
 import { useEffect, useState, useRef } from "react";
 import { OptionChain, OptionContractData, OptionTableRow, WebSocketLtpUpdate } from "../types/optionTypes";
 import { WebSocketService } from "../services/webSocketService";
 import { CONTRACTS_API_URL, OPTION_CHAIN_API_URL } from "../constants/urlContants";
 import { resetUpdatedContracts, getLatestTableData, getUpdatedContracts } from "../utils/optionTableDataUpdater";
 
+// Fetch option contracts and listen for live updates via WebSocket.
+// Expose state and handlers for expiry selection and table data.
 export function useOptionChain() {
+
+  // Define all states and handlers for option data
   const [validContracts, setValidContracts] = useState<Record<string, OptionContractData[]>>({});
   const [latestOptionChain, setLatestOptionChain] = useState<Record<string, OptionChain>>({});
   const [tableData, setTableData] = useState<OptionTableRow[]>([]);
@@ -15,6 +20,7 @@ export function useOptionChain() {
 
   const wsRef = useRef<WebSocketService | null>(null);
 
+  // Fetch contracts on mount, handle loading and error states
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -42,6 +48,7 @@ export function useOptionChain() {
     })();
   }, []);
 
+  // Set up and tear down WebSocket connection for real-time updates
   useEffect(() => {
     if (!selectedExpiry || !latestOptionChain[selectedExpiry]) return;
     
@@ -59,6 +66,7 @@ export function useOptionChain() {
     });
   }, [selectedExpiry]);
 
+  // Provide handlers and latest data to components
   return {
     validExpiry: validExpiries,
     selectedExpiry,

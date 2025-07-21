@@ -1,3 +1,4 @@
+// All TypeScript type definitions for option contracts, table rows, expiries, etc.
 export interface OptionContractData {
     token: string;
     symbol: string;

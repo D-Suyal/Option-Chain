@@ -1,3 +1,4 @@
+// Shows a horizontal list of expiry dates. Highlights the selected expiry and displays days left.
 import React from "react";
 import { ScrollView, TouchableOpacity, Text, StyleSheet } from "react-native";
 import expiryFilterStyles from "../styles/expiryFilterStyles";
@@ -22,6 +23,7 @@ const ExpiryFilter: React.FC<ExpiryFilterProps> = ({ expiries, selectedExpiry, o
   </ScrollView>
 );
 
+// Helper: Formats the expiry date and displays days remaining
 function RenderExpiryRichText(dateStr: string) {
   const date = new Date(dateStr);
   const today = new Date();

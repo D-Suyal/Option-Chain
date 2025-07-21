@@ -1,3 +1,4 @@
+// Manages WebSocket connection and real-time updates for the option chain.
 import { WebSocketLtpUpdate } from "../types/optionTypes";
 import { WEBSOCKET_URL } from "../constants/urlContants";
 
@@ -9,12 +10,14 @@ export class WebSocketService {
   private expiry: string;
   private callback: LtpUpdateCallback;
 
+  // Store WebSocket instance and connection state
   constructor(expiry: string, callback: LtpUpdateCallback) {
     this.expiry = expiry;
     this.callback = callback;
     this.ws = this.init();
   }
 
+  // Method to connect and send subscription message
   private init() {
     //console.log("websockett init");
     const ws = new WebSocket(WEBSOCKET_URL);
@@ -35,6 +38,7 @@ export class WebSocketService {
       }));
     };
 
+    // Listen for incoming LTP updates
     ws.onmessage = (evt) => {
       try {
         const data = JSON.parse(evt.data);
@@ -53,6 +57,7 @@ export class WebSocketService {
     return ws;
   }
 
+  // Handle reconnects
   private reconnect() {
     if (this.reconnectTimeout) clearTimeout(this.reconnectTimeout);
     this.reconnectTimeout = setTimeout(() => {
@@ -60,6 +65,7 @@ export class WebSocketService {
     }, 3000);
   }
 
+  //Handle cleanup, and closing connection
   public close() {
     if (this.reconnectTimeout) clearTimeout(this.reconnectTimeout);
 

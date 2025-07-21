@@ -1,3 +1,4 @@
+// Displays a shimmer/skeleton placeholder while table data is loading.
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";

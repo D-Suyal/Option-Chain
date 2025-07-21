@@ -1,3 +1,5 @@
+// All API and WebSocket URLs used throughout the app.
+
 const DOMAIN = "prices.algotest.xyz";
 const BASE_URL = `https://${DOMAIN}`;
 

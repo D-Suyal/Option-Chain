@@ -1,3 +1,4 @@
+// Helper utilities for updating option table data efficiently as new WebSocket messages arrive.
 import { OptionContractData, OptionTableRow, OptionChain, WebSocketLtpUpdate } from "../types/optionTypes";
 import { SHOW_EMPTY_DATA } from "../config/config";
 

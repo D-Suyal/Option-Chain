@@ -1,3 +1,4 @@
+// Renders the main table: Header, list of OptionRow, loading and error states.
 import React from "react";
 import { FlatList, View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from "react-native";
 import { OptionTableRow } from "../types/optionTypes";
