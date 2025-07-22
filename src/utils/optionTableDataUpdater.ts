@@ -1,8 +1,16 @@
 // Helper utilities for updating option table data efficiently as new WebSocket messages arrive.
 import { OptionContractData, OptionTableRow, OptionChain, WebSocketLtpUpdate } from "../types/optionTypes";
-import { SHOW_EMPTY_DATA } from "../config/config";
+import { REQUEST_TIMEOUT, SHOW_EMPTY_DATA } from "../config/config";
 
 let updatedContracts_wrt_Strike = new Map<number, OptionTableRow>();
+
+export function fetchWithTimeout(resource: string, options: RequestInit = {}): Promise<Response> { // 7s default
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+  return fetch(resource, { ...options, signal: controller.signal })
+    .finally(() => clearTimeout(id));
+}
+
 
 export function resetUpdatedContracts() {
     updatedContracts_wrt_Strike = new Map<number, OptionTableRow>();

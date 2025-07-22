@@ -8,7 +8,7 @@ import { appStyles, cardStyles } from "../styles/appStyles";
 
 const OptionChainScreen: React.FC = () => {
   // Pull option chain data and handlers from custom hook
-  const { validExpiry, selectedExpiry, setSelectedExpiry, latestTableData, loading, error } = useOptionChain();
+  const { validExpiry, selectedExpiry, setSelectedExpiry, latestTableData, loading, error, fetchOptionChainData } = useOptionChain();
 
   return (
     <View style={appStyles.container}>
@@ -22,6 +22,7 @@ const OptionChainScreen: React.FC = () => {
         tableData={latestTableData}
         loading={loading}
         error={error}
+        onRetry={fetchOptionChainData}
       />
     </View>
   );
