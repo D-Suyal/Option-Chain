@@ -140,5 +140,3 @@ For build or runtime issues, refer to the official React Native [Troubleshooting
 Congratulations! You’re ready to use, explore, and extend the BANKNIFTY Option Chain app.
 
 ---
-
-**Let me know if you want to add a “Features” section, API documentation, screenshots, or usage examples!**
